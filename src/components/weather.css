@@ -54,3 +54,9 @@
 .weather .getweather:focus {
   outline: none;
 }
+
+@media (max-width: 500px) {
+  .weather .title {
+    font-size: 2.5rem;
+  }
+}

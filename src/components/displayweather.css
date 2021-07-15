@@ -57,7 +57,6 @@
 .displayweather .weatherdetails {
   margin-left: 50px;
   margin-right: 50px;
-
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
@@ -76,4 +75,52 @@ h4 {
 
 .displayweather .weatherdetails span {
   font-size: 1.2rem;
+}
+
+@media (max-width: 500px) {
+  .displayweather {
+    overflow: hidden;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    width: 90vw;
+    margin: 0;
+  }
+
+  .displayweather .maincard {
+    width: 90vw;
+    border-radius: 0px;
+    left: -40px;
+    border: none;
+    background: none;
+  }
+
+  .displayweather .weatherdetails {
+    margin-left: 0px;
+    display: block;
+  }
+
+  h4 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  .weather-icon {
+    display: none;
+  }
+  .displayweather .maincard .cardtitle {
+    left: 50px;
+  }
+  .displayweather .maincard .cardsubtitle {
+    left: 50px;
+  }
+
+  .displayweather .weather-description {
+    left: 50px;
+  }
+  .displayweather .weather-main {
+    display: none;
+  }
+  .displayweather h1 {
+    margin-left: -2%;
+  }
 }
