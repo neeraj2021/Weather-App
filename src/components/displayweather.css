@@ -25,7 +25,6 @@
 .displayweather .maincard .cardsubtitle {
   position: absolute;
   left: 10px;
-
   color: grey;
   margin-top: -8px;
 }
@@ -73,10 +72,6 @@ h4 {
   text-align: left;
   margin-right: 30px;
   font-size: 1.2rem;
-}
-
-td {
-  border-bottom: 2px dashed grey;
 }
 
 .displayweather .weatherdetails span {

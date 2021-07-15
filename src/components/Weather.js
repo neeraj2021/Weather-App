@@ -32,10 +32,10 @@ function Weather() {
 
     console.log(name, value);
 
-    if (name == "city") {
+    if (name === "city") {
       setForm({ city: value });
     }
-    if (name == "country") {
+    if (name === "country") {
       setForm({ country: value });
     }
   };
@@ -54,7 +54,6 @@ function Weather() {
           name="city"
           onChange={(e) => handleChange(e)}
         />
-        &nbsp; &nbsp; &nbsp;&nbsp;
         <input
           type="text"
           placeholder="Country Name (Optional)"
@@ -67,7 +66,7 @@ function Weather() {
       </form>
 
       {console.log(weather)}
-      {weather.data != undefined ? (
+      {weather.data !== undefined ? (
         <div>
           <DisplayWeather data={weather.data} />
         </div>
