@@ -6,13 +6,10 @@
 
 .displayweather .maincard {
   width: 500px;
-  margin-top: 20px;
+  margin: 0px 20px;
   align-self: center;
   padding: 50px;
-  border-radius: 20px;
   position: relative;
-  background: rgb(142 224 227);
-  border: 1px solid black;
 }
 
 .displayweather .maincard .cardtitle {
@@ -71,10 +68,13 @@ h4 {
   text-align: left;
   margin-right: 30px;
   font-size: 1.2rem;
+  margin-top: 18px;
 }
 
 .displayweather .weatherdetails span {
+  position: relative;
   font-size: 1.2rem;
+  top: 7px;
 }
 
 @media (max-width: 500px) {
@@ -102,6 +102,12 @@ h4 {
   h4 {
     margin-top: 6px;
     margin-bottom: 6px;
+  }
+
+  .displayweather .weatherdetails span {
+    position: relative;
+    font-size: 1.2rem;
+    top: 0px;
   }
 
   .weather-icon {
