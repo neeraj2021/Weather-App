@@ -1,5 +1,6 @@
 import React from "react";
 import "./displayweather.css";
+
 function DisplayWeather(props) {
   const { data } = props;
   const iconurl =
@@ -20,7 +21,7 @@ function DisplayWeather(props) {
 
             <h1>
               {Math.floor(data.main.temp - 273.15)}
-              <sup>o</sup>
+              <sup>o</sup>C
             </h1>
             <span className="weather-main">{data.weather[0].main}</span>
             <img className="weather-icon" src={iconurl} alt="" srcSet="" />

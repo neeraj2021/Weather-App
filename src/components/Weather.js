@@ -7,16 +7,16 @@ function Weather() {
   const [loading, setLoading] = useState(true);
   const [isErr, setIsErr] = useState(false);
 
-  const [form, setForm] = useState({
-    city: "",
-    country: "",
-  });
+  const [history, setHistory] = useState([]);
+
+  const [city, setCity] = useState("");
 
   const APIKEY = "e19bc56d35c8a8c0ce5c11b6a0c79f02";
 
   const fetchData = async function () {
+    // console.log(history);
     return fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${form.city},${form.country}&APPID=${APIKEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${APIKEY}`
     )
       .then((res) => res.json())
       .then((data) => data);
@@ -26,6 +26,10 @@ function Weather() {
     e.preventDefault();
     setLoading(true);
     setIsErr(false);
+
+    let d = 0;
+    while (d < 1000) d++;
+
     let init = async function () {
       setLoading(true);
 
@@ -33,7 +37,14 @@ function Weather() {
       // console.log("data = ", data);
       if (data.cod === "404") setIsErr(true);
       setWeather(data);
-      // console.log("weather = ", data);
+      if (data.name !== undefined) {
+        setHistory([
+          { cityName: data.name, cityTemp: data.main.temp },
+          ...history,
+        ]);
+        // console.log("weather = ", data);
+      }
+      // console.log(history);
       setLoading(false);
     };
     init();
@@ -44,19 +55,6 @@ function Weather() {
     setIsErr(false);
   }, []);
 
-  const handleChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
-    // console.log(name, value);
-    if (name === "city") {
-      setForm({ city: value });
-    }
-    if (name === "country") {
-      setForm({ country: value });
-    }
-  };
-
   return (
     <div className="weather">
       <div className="title">
@@ -64,22 +62,20 @@ function Weather() {
         <br />
       </div>
 
-      <form className="form" onSubmit={weatherData}>
+      <form className="form">
         <input
           type="text"
           placeholder="City Name (Required)"
           name="city"
           required
-          value={form.city}
-          onChange={(e) => handleChange(e)}
+          value={city}
+          onChange={(e) => {
+            setLoading(true);
+            setIsErr(false);
+            setCity(e.target.value);
+          }}
         />
-        <input
-          type="text"
-          placeholder="Country Name (Optional)"
-          name="country"
-          onChange={(e) => handleChange(e)}
-        />
-        <button type="submit" className="getweather">
+        <button type="submit" className="getweather" onClick={weatherData}>
           Submit
         </button>
       </form>
@@ -89,8 +85,29 @@ function Weather() {
       ) : isErr ? (
         <h3>City Not Found</h3>
       ) : (
-        <div>{<DisplayWeather data={weather} />}</div>
+        <>
+          <div>{<DisplayWeather data={weather} />}</div>
+          <br />
+          <br />
+          <hr />
+          <hr />
+          <br />
+          <br />
+        </>
       )}
+      <h2>Previous Search</h2>
+
+      {history.map((ele, index) => {
+        return (
+          <h4 key={index}>
+            <span style={{ margin: "1px 25px 0px 0px" }}>{ele.cityName}</span>
+            <span>
+              {Math.floor(ele.cityTemp - 273.15)}
+              <sup>o</sup>C
+            </span>
+          </h4>
+        );
+      })}
     </div>
   );
 }
